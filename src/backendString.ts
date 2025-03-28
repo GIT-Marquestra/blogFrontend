@@ -1,1 +1,1 @@
-export const backend = 'http://localhost:3000'
+export const backend = 'https://blogbackend-production-d7e8.up.railway.app'
