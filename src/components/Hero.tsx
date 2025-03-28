@@ -60,7 +60,7 @@ const LandingPage: React.FC = () => {
   const [hasMore, setHasMore] = useState(true);
 
   useEffect(() => {
-    // Check authentication on component mount
+
     const token = localStorage.getItem('authToken');
     
     const verifyToken = async () => {
@@ -75,10 +75,8 @@ const LandingPage: React.FC = () => {
           });
 
           if (response.ok) {
-            // Token is valid, set signed in state
             setIsSignedIn(true);
           } else {
-            // Token is invalid, remove from local storage and redirect to signin
             localStorage.removeItem('authToken');
             localStorage.removeItem('username');
             localStorage.removeItem('email');
@@ -87,11 +85,9 @@ const LandingPage: React.FC = () => {
           }
         } catch (error) {
           console.error('Token verification error:', error);
-          // Redirect to signin on error
           window.location.href = '/signin';
         }
       } else {
-        // No token, redirect to signin
         window.location.href = '/signin';
       }
     };
@@ -99,7 +95,6 @@ const LandingPage: React.FC = () => {
     verifyToken();
   }, [setIsSignedIn]);
 
-  // Fetch countries data
   useEffect(() => {
     const fetchCountries = async () => {
       try {
@@ -111,7 +106,6 @@ const LandingPage: React.FC = () => {
         }
         
         const data = await response.json();
-        // Sort countries by population (descending)
         const sortedCountries = data.sort((a: Country, b: Country) => b.population - a.population);
         
         setAllCountries(sortedCountries);
@@ -128,7 +122,6 @@ const LandingPage: React.FC = () => {
     fetchCountries();
   }, [visibleCount]);
 
-  // Filter countries based on search term
   useEffect(() => {
     if (searchTerm) {
       const filtered = allCountries.filter(country => 
@@ -144,12 +137,10 @@ const LandingPage: React.FC = () => {
     }
   }, [searchTerm, allCountries, visibleCount]);
 
-  // Load more countries
   const handleLoadMore = () => {
     const newVisibleCount = visibleCount + 16;
     setVisibleCount(newVisibleCount);
     
-    // Update filtered countries based on search term
     if (searchTerm) {
       const filtered = allCountries.filter(country => 
         country.name.common.toLowerCase().includes(searchTerm.toLowerCase()) ||
@@ -187,7 +178,6 @@ const LandingPage: React.FC = () => {
     }
   ];
 
-  // If not signed in, don't render the page
   if (!isSignedIn) {
     return null;
   }

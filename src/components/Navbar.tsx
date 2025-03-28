@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Home, Bolt, LogOut, LogOutIcon } from 'lucide-react';
+import { Home, Bolt, LogOut } from 'lucide-react';
 import { useAuth } from './SignStateContext';
 import { Button } from './ui/button';
 
@@ -15,7 +15,7 @@ export function Navbar() {
   return (
     <nav className="fixed top-0 left-0 w-full bg-black/80 backdrop-blur-md z-50">
       <div className="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between">
-        {/* Cool Flash Logo */}
+
         <div className="flex items-center space-x-2">
           <a href="/">
           <div className="relative">
@@ -29,7 +29,7 @@ export function Navbar() {
           </a>
         </div>
 
-        {/* Desktop Navigation */}
+
         <div className="hidden md:flex space-x-6">
           {navItems.map((item) => (
             <a 
@@ -64,7 +64,7 @@ export function Navbar() {
             <a 
               key={item.name}
               href={item.link} 
-              className="block px-4 py-3 text-gray-300 hover:bg-gray-800 flex items-center space-x-3"
+              className="px-4 py-3 text-gray-300 hover:bg-gray-800 flex items-center space-x-3"
             >
               {React.cloneElement(item.icon, {
                 className: "h-5 w-5 mr-3 text-gray-400"
