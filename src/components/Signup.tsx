@@ -1,5 +1,6 @@
 import React, { useState, FormEvent } from "react";
 import { Eye, EyeOff } from "lucide-react";
+import { backend } from "../backendString";
 
 interface SignupProps {
   email?: string;
@@ -48,7 +49,7 @@ const Signup: React.FC<SignupProps> = ({ email: initialEmail }) => {
 
     setIsSubmitting(true);
     try {
-      const response = await fetch('http://localhost:3000/signup', {
+      const response = await fetch(`${backend}/signup`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -75,20 +76,20 @@ const Signup: React.FC<SignupProps> = ({ email: initialEmail }) => {
   };
 
   return (
-    <div className="flex justify-center items-center min-h-screen p-5 bg-gray-100 dark:bg-gray-900 transition-colors duration-300">
-      <div className="w-full max-w-md p-8 space-y-6 bg-white dark:bg-gray-800 rounded-xl shadow-md dark:shadow-xl transition-colors duration-300">
+    <div className="flex justify-center items-center min-h-screen p-5 bg-gray-950">
+      <div className="w-full max-w-md p-8 space-y-6 bg-gray-900 rounded-xl shadow-lg shadow-purple-900/30">
         <div className="text-center">
-          <h2 className="text-2xl font-bold text-gray-800 dark:text-gray-100 mb-2">
+          <h2 className="text-2xl font-bold text-purple-300 mb-2">
             Create Your Account
           </h2>
-          <p className="text-sm text-gray-600 dark:text-gray-400 mb-6">
+          <p className="text-sm text-purple-200/70 mb-6">
             Sign up to get started
           </p>
         </div>
 
-        <form onSubmit={handleSubmit} className="space-y-4">
+        <form onSubmit={handleSubmit} className="space-y-5">
           <div>
-            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+            <label className="block text-sm font-medium text-purple-200 mb-2">
               Username
             </label>
             <input 
@@ -96,17 +97,17 @@ const Signup: React.FC<SignupProps> = ({ email: initialEmail }) => {
               value={username}
               onChange={(e) => setUsername(e.target.value)}
               placeholder="Choose a unique username"
-              className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 dark:bg-gray-700 dark:text-gray-200"
+              className="w-full px-3 py-2 border border-purple-900 rounded-md focus:outline-none focus:ring-2 focus:ring-purple-500 bg-gray-800 text-gray-200"
             />
             {errors.username && (
-              <p className="text-xs text-red-500 mt-1">
+              <p className="text-xs text-red-400 mt-1">
                 {errors.username}
               </p>
             )}
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+            <label className="block text-sm font-medium text-purple-200 mb-2">
               Email
             </label>
             <input 
@@ -115,17 +116,17 @@ const Signup: React.FC<SignupProps> = ({ email: initialEmail }) => {
               onChange={(e) => setEmail(e.target.value)}
               placeholder="Enter your email"
               disabled={!!initialEmail}
-              className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 disabled:bg-gray-100 disabled:cursor-not-allowed dark:bg-gray-700 dark:text-gray-200 dark:disabled:bg-gray-800"
+              className="w-full px-3 py-2 border border-purple-900 rounded-md focus:outline-none focus:ring-2 focus:ring-purple-500 bg-gray-800 text-gray-200 disabled:bg-gray-700 disabled:cursor-not-allowed"
             />
             {errors.email && (
-              <p className="text-xs text-red-500 mt-1">
+              <p className="text-xs text-red-400 mt-1">
                 {errors.email}
               </p>
             )}
           </div>
 
           <div className="relative">
-            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+            <label className="block text-sm font-medium text-purple-200 mb-2">
               Password
             </label>
             <div className="relative">
@@ -134,18 +135,18 @@ const Signup: React.FC<SignupProps> = ({ email: initialEmail }) => {
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 placeholder="Create a strong password"
-                className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 pr-10 dark:bg-gray-700 dark:text-gray-200"
+                className="w-full px-3 py-2 border border-purple-900 rounded-md focus:outline-none focus:ring-2 focus:ring-purple-500 pr-10 bg-gray-800 text-gray-200"
               />
               <button 
                 type="button"
                 onClick={() => setIsPasswordVisible(!isPasswordVisible)}
-                className="absolute right-2 top-1/2 -translate-y-1/2 text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200 focus:outline-none"
+                className="absolute right-2 top-1/2 -translate-y-1/2 text-purple-300 hover:text-purple-100 focus:outline-none"
               >
                 {isPasswordVisible ? <EyeOff size={20} /> : <Eye size={20} />}
               </button>
             </div>
             {errors.password && (
-              <p className="text-xs text-red-500 mt-1">
+              <p className="text-xs text-red-400 mt-1">
                 {errors.password}
               </p>
             )}
@@ -154,11 +155,16 @@ const Signup: React.FC<SignupProps> = ({ email: initialEmail }) => {
           <button 
             type="submit" 
             disabled={isSubmitting}
-            className="w-full py-2 px-4 bg-blue-600 text-white rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50 disabled:opacity-50 disabled:cursor-not-allowed dark:bg-blue-700 dark:hover:bg-blue-600"
+            className="w-full py-2 px-4 bg-purple-700 text-white rounded-md hover:bg-purple-600 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-opacity-50 disabled:opacity-50 disabled:cursor-not-allowed transition-colors duration-300"
           >
             {isSubmitting ? "Signing Up..." : "Create Account"}
           </button>
         </form>
+        <a href="/signin" className='flex justify-center'>
+          <div className='text-purple-400 hover:text-purple-300 transition-colors duration-300'>
+            Already have an account? Sign In
+          </div>
+        </a>
       </div>
     </div>
   );
