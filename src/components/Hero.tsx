@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import { BookOpen, Database, Globe, Search } from 'lucide-react';
-import { HoverBorderGradient } from './ui/hover-border-gradient';
 import { useAuth } from './SignStateContext';
 import { backend } from './../backendString';
 
