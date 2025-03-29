@@ -1,54 +1,92 @@
-# React + TypeScript + Vite
+# Vite + React Project
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This guide provides step-by-step instructions to set up and run the Vite + React project locally.
 
-Currently, two official plugins are available:
+## Prerequisites
+Ensure you have the following installed:
+- **Node.js** (>= 18.x)
+- **npm** (comes with Node.js) or **yarn**
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Setup Instructions
 
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
-
-```js
-export default tseslint.config({
-  extends: [
-    // Remove ...tseslint.configs.recommended and replace with this
-    ...tseslint.configs.recommendedTypeChecked,
-    // Alternatively, use this for stricter rules
-    ...tseslint.configs.strictTypeChecked,
-    // Optionally, add this for stylistic rules
-    ...tseslint.configs.stylisticTypeChecked,
-  ],
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
+### 1. Clone the Repository
+```sh
+git clone <repository_url>
+cd <repository_name>
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
-
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default tseslint.config({
-  plugins: {
-    // Add the react-x and react-dom plugins
-    'react-x': reactX,
-    'react-dom': reactDom,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended typescript rules
-    ...reactX.configs['recommended-typescript'].rules,
-    ...reactDom.configs.recommended.rules,
-  },
-})
+### 2. Install Dependencies
+Using npm:
+```sh
+npm install
 ```
+Using yarn:
+```sh
+yarn install
+```
+
+### 3. Start the Development Server
+Using npm:
+```sh
+npm run dev
+```
+Using yarn:
+```sh
+yarn dev
+```
+This will start a local development server, typically at `http://localhost:5173/`.
+
+### 4. Build the Project
+To create a production build, run:
+```sh
+npm run build
+```
+This will generate an optimized `dist/` folder.
+
+### 5. Preview the Production Build
+After building, preview the app locally:
+```sh
+npm run preview
+```
+This will serve the built files on a local server.
+
+## Additional Configurations
+
+### Using Environment Variables
+Create a `.env` file in the project root and add necessary variables:
+```sh
+VITE_API_URL=http://localhost:3000
+```
+Access them in React components via:
+```js
+const apiUrl = import.meta.env.VITE_API_URL;
+```
+
+### Linting and Formatting
+To check for linting errors:
+```sh
+npm run lint
+```
+To format code:
+```sh
+npm run format
+```
+
+### Deploying the App
+- Ensure you have run `npm run build`.
+- Deploy the `dist/` folder to a static hosting provider like **Vercel, Netlify, or GitHub Pages**.
+
+## Troubleshooting
+- If dependencies fail, try:
+  ```sh
+  rm -rf node_modules package-lock.json && npm install
+  ```
+- Ensure `vite.config.ts` is correctly set up.
+- Check the console logs for errors and missing environment variables.
+
+## License
+This project is licensed under [MIT License](LICENSE).
+
+## Contributing
+Feel free to fork, open issues, or submit pull requests to improve the project.
+

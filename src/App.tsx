@@ -5,11 +5,10 @@ import { Navbar } from "./components/Navbar";
 import SignIn from "./components/SignIn";
 import HomePage from "./components/Home";
 import { Toaster } from "react-hot-toast"
-// import Log from "./pages/loginSignup.jsx";
 
 
 
-
+// Routing here
 function App() {
     return (
         <div>

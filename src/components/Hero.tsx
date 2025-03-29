@@ -183,9 +183,9 @@ const LandingPage: React.FC = () => {
 
   return (
     <div className="min-h-screen bg-black text-white overflow-hidden relative p-10">
-      {/* Main Content */}
+
       <div className="relative container mx-auto px-4 py-16">
-        {/* Hero Section */}
+
         <div className="max-w-5xl mx-auto">
           <h1 className="text-5xl md:text-7xl font-bold mb-6 text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-600 text-center">
             Flash Global Data Explorer
@@ -194,7 +194,7 @@ const LandingPage: React.FC = () => {
             Discover tech insights and explore global data with our REST Countries API integration.
           </p>
 
-          {/* Search Bar */}
+
           <div className="relative mx-auto max-w-md mb-10">
             <input
               type="text"
@@ -208,7 +208,7 @@ const LandingPage: React.FC = () => {
             </div>
           </div>
 
-          {/* Countries Grid */}
+
           <div className="mb-16">
             <h2 className="text-2xl font-bold mb-6 text-center text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-blue-500">
               Explore Country Data
@@ -241,7 +241,7 @@ const LandingPage: React.FC = () => {
                       ))}
                     </div>
                     
-                    {/* Load More Button */}
+
                     {hasMore && (
                       <div className="flex justify-center mt-8">
                         <button
@@ -258,7 +258,7 @@ const LandingPage: React.FC = () => {
             )}
           </div>
 
-          {/* Features Grid */}
+
           <div className="grid md:grid-cols-2 gap-6">
             {features.map((feature, index) => (
               <FeatureCard 

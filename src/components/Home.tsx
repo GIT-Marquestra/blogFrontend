@@ -4,7 +4,7 @@ import { useAuth } from './SignStateContext';
 import { backend } from '../backendString';
 import toast from "react-hot-toast"
 
-// Blog interface
+
 interface Blog {
   id: string;
   title: string;
@@ -22,14 +22,14 @@ interface Blog {
   comments?: Comment[];
 }
 
-// Like interface
+
 interface Like {
   id: string;
   blogId: string;
   username: string;
 }
 
-// Comment interface
+
 interface Comment {
   id: string;
   content: string;
@@ -51,7 +51,7 @@ export default function HomePage() {
   const [newComment, setNewComment] = useState('');
   const [isLiked, setIsLiked] = useState(false);
 
-  // Fetch blogs effect
+
   useEffect(() => {
     async function fetchBlogs() {
       try {
@@ -71,7 +71,7 @@ export default function HomePage() {
     fetchBlogs();
   }, []);
 
-  // Check if user has liked the blog
+
   useEffect(() => {
     if (expandedBlog && username) {
       const hasLiked = expandedBlog.likes?.some(like => like.username === username);
@@ -79,7 +79,7 @@ export default function HomePage() {
     }
   }, [expandedBlog, username]);
 
-  // Create blog handler
+
   const handleCreateBlog = async (e: React.FormEvent) => {
     setLoading(true)
     e.preventDefault();
@@ -109,7 +109,7 @@ export default function HomePage() {
     }
   };
 
-  // Delete blog handler
+
   const handleDeleteBlog = async (blogId: string) => {
     try {
       toast.loading("Deleting...")
@@ -130,7 +130,7 @@ export default function HomePage() {
     }
   };
 
-  // Handle like function
+
   const handleLike = (blogId: string) => async () => {
     if (!isSignedIn) {
       toast.error("Please sign in to like blogs");
@@ -148,15 +148,15 @@ export default function HomePage() {
       });
 
       if (response.ok) {
-        // Update local state
+
         if (expandedBlog && expandedBlog.id === blogId) {
-          // Fetch updated blog to get latest likes
+
           const updatedBlogResponse = await fetch(`${backend}/api/blogs/${blogId}`);
           const updatedBlog = await updatedBlogResponse.json();
           setExpandedBlog(updatedBlog);
         }
 
-        // Update blogs list with proper type handling
+
         setBlogs(prevBlogs => 
           prevBlogs.map(blog => {
             if (blog.id === blogId) {
@@ -167,7 +167,7 @@ export default function HomePage() {
                   ...blog._count,
                   likes: isLiked ? likeCount - 1 : likeCount + 1
                 }
-              } as Blog;  // Explicitly cast back to Blog type
+              } as Blog; 
             }
             return blog;
           })
@@ -182,7 +182,7 @@ export default function HomePage() {
     }
   };
 
-  // Handle comment submission
+
   const handleCommentSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     
@@ -205,7 +205,7 @@ export default function HomePage() {
       if (response.ok) {
         const comment = await response.json();
         
-        // Update expanded blog with new comment
+
         setExpandedBlog(prev => {
           if (!prev) return null;
           
@@ -222,7 +222,7 @@ export default function HomePage() {
           };
         });
 
-        // Update blogs list comment count with proper type handling
+
         setBlogs(prevBlogs => 
           prevBlogs.map(blog => {
             if (blog.id === expandedBlog.id) {
@@ -233,7 +233,7 @@ export default function HomePage() {
                   ...blog._count,
                   comments: commentCount + 1
                 }
-              } as Blog;  // Explicitly cast back to Blog type
+              } as Blog; 
             }
             return blog;
           })
